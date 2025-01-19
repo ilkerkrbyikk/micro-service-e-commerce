@@ -14,8 +14,13 @@ spring:
       bootstrap-servers: localhost:9092
       group-id: paymentGroup,orderGroup
       auto-offset-reset: earliest
+<<<<<<< HEAD
       key-serializer: org.apache.kafka.common.serialization.StringDeserializer
       value-serializer: org.springframework.kafka.support.serializer.JsonDeserializer
+=======
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+>>>>>>> 0d6a39da5b0e2e404ec94b747a2847beb51f0e09
       properties:
         spring.json.trusted.packages: '*'
         spring.json.type.mapping: orderConfirmation:com.Ilker.order_service.dto.OrderConfirmation,paymentConfirmation:com.Ilker.payment_service.dto.PaymentNotificationRequest

@@ -1,8 +1,13 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/order
+<<<<<<< HEAD
     username: root
     password: root
+=======
+    username: alibou
+    password: alibou
+>>>>>>> 0d6a39da5b0e2e404ec94b747a2847beb51f0e09
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
