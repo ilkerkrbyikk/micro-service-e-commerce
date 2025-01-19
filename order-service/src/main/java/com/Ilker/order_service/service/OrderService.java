@@ -1,6 +1,7 @@
 package com.Ilker.order_service.service;
 
 import com.Ilker.order_service.client.CustomerClient;
+import com.Ilker.order_service.client.PaymentClient;
 import com.Ilker.order_service.client.ProductClient;
 import com.Ilker.order_service.dto.*;
 import com.Ilker.order_service.exception.BusinessException;
@@ -25,6 +26,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder( OrderRequest request) {
         var customer = this.customerClient.findCustomerById(request.getCustomerId())
@@ -44,7 +46,14 @@ public class OrderService {
                             purchaseRequest.getQuantity())
             );
 
-            //TODO: PAYMENT PROCESS
+            var paymentRequest = new PaymentRequest(
+                    request.getAmount(),
+                    request.getPaymentMethod(),
+                    order.getId(),
+                    order.getReference(),
+                    customer
+            );
+            paymentClient.requestOrderPayment(paymentRequest);
 
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
